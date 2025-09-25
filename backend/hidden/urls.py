@@ -6,6 +6,6 @@ urlpatterns = [
     path("register/", register, name="register"),
     path("login/", TokenObtainPairView.as_view(), name="login"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    path("message/send/<unique_link>/", send_message, name="send_message"),
+    path("message/send/<str:secret_link>/", send_message, name="send_message"),
 ]
  

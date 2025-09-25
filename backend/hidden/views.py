@@ -29,9 +29,9 @@ def register(request):
 
 @api_view(["POST"])
 @permission_classes([AllowAny])
-def send_message(request, unique_link):
+def send_message(request, secret_link):
     try:
-        user = User.objects.get(unique_link=unique_link)
+        user = User.objects.get(secret_link=secret_link)
     except User.DoesNotExist:
         return Response({"error": "Invalid link"}, status=status.HTTP_400_BAD_REQUEST)
 
