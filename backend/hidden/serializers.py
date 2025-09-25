@@ -30,9 +30,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
-    users = UserSerializer(many=True, read_only=True)
+    user = UserSerializer(read_only=True)
     class Meta:
         model = Message
-        fields = ["id", "message", "is_read", "created_at", "users"]
+        fields = ["id", "message", "is_read", "created_at", "user"]
 
 
