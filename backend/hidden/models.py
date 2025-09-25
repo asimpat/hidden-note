@@ -25,7 +25,7 @@ class User(AbstractUser):
 
 
 class Message(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="messages")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="users")
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)
