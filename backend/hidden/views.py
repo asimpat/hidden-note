@@ -3,7 +3,7 @@ from rest_framework import status
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Message
 
 
@@ -44,8 +44,20 @@ def send_message(request, secret_link):
 
 
 @api_view(["GET"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_messages(request):
     messages = Message.objects.all()
     serializer = MessageSerializer(messages, many=True)
     return Response(serializer.data)
+
+
+@api_view(["DELETE"])
+@permission_classes([IsAuthenticated])
+def delete_message(request, id):
+    try:
+        message = Message.objects.get(id=id, user=request.user)
+    except Message.DoesNotExist:
+        return Response({"error": "Message not found"}, status=status.HTTP_400_BAD_REQUEST)
+
+    message.delete()
+    return Response({"message": "Deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
