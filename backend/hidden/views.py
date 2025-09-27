@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Message
+from .utils import error_response
 
 
 User = get_user_model()
@@ -34,8 +35,7 @@ def send_message(request, secret_link):
     try:
         user = User.objects.get(secret_link=secret_link)
     except User.DoesNotExist:
-        return Response({"error": "Invalid link"}, status=status.HTTP_400_BAD_REQUEST)
-
+        return error_response("Invalid link", code="invalid_link", status_code=status.HTTP_404_NOT_FOUND)
     serializer = MessageSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save(user=user)
@@ -46,7 +46,7 @@ def send_message(request, secret_link):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_messages(request):
-    messages = Message.objects.all()
+    messages = Message.objects.filter(user=request.user)
     serializer = MessageSerializer(messages, many=True)
     return Response(serializer.data)
 
@@ -61,3 +61,11 @@ def delete_message(request, id):
 
     message.delete()
     return Response({"message": "Deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def get_users(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)

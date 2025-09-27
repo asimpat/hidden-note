@@ -22,17 +22,17 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ["id", "username", "email", "role", "secret_link"]
-        read_only_fields = ["id", "role", "secret_link"]
-
 
 class MessageSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
     class Meta:
         model = Message
-        fields = ["id", "message", "is_read", "created_at", "user"]
+        fields = ["id", "message", "is_read", "created_at"]
 
+
+class UserSerializer(serializers.ModelSerializer):
+    messages = MessageSerializer(many=True, read_only=True)
+    class Meta:
+        model = User
+        fields = ["id", "username", "email", "role", "secret_link", "messages"]
+        read_only_fields = ["id", "role", "secret_link"]
 
