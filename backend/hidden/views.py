@@ -57,7 +57,8 @@ def delete_message(request, id):
     try:
         message = Message.objects.get(id=id, user=request.user)
     except Message.DoesNotExist:
-        return Response({"error": "Message not found"}, status=status.HTTP_400_BAD_REQUEST)
+        return error_response("", code="invalid_link", status_code=status.HTTP_404_NOT_FOUND)
+        # return Response({"error": "Message not found"}, status=status.HTTP_400_BAD_REQUEST)
 
     message.delete()
     return Response({"message": "Deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
