@@ -3,9 +3,10 @@ from rest_framework import status
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .models import Message
 from .utils import error_response
+from rest_framework import generics
 
 
 User = get_user_model()
@@ -43,12 +44,20 @@ def send_message(request, secret_link):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(["GET"])
-@permission_classes([IsAuthenticated])
-def get_messages(request):
-    messages = Message.objects.filter(user=request.user)
-    serializer = MessageSerializer(messages, many=True)
-    return Response(serializer.data)
+# @api_view(["GET"])
+# @permission_classes([IsAuthenticated])
+# def get_messages(request):
+#     messages = Message.objects.filter(user=request.user)
+#     serializer = MessageSerializer(messages, many=True)
+#     return Response(serializer.data)
+
+class MessageListView(generics.ListAPIView):
+    serializer_class = MessageSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # only messages for the logged-in user
+        return Message.objects.filter(user=self.request.user)
 
 
 @api_view(["DELETE"])
@@ -64,9 +73,17 @@ def delete_message(request, id):
     return Response({"message": "Deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(["GET"])
-@permission_classes([AllowAny])
-def get_users(request):
-    users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
+# @api_view(["GET"])
+# @permission_classes([AllowAny])
+# def get_users(request):
+#     users = User.objects.all()
+#     serializer = UserSerializer(users, many=True)
+#     return Response(serializer.data)
+
+
+class UserListView(generics.ListAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get_queryset(self):
+        return User.objects.all()
