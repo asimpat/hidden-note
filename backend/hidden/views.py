@@ -8,6 +8,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .models import Message
 from .utils import error_response
 from rest_framework import generics
+from hidden.filter import MessageFilter
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 User = get_user_model()
@@ -84,6 +87,14 @@ class SendMessageView(generics.CreateAPIView):
 class MessageListView(generics.ListAPIView):
     serializer_class = MessageSerializer
     permission_classes = [IsAuthenticated]
+    filterset_class = MessageFilter
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    search_fields = ['message']
+    ordering_fields = ['created_at', 'is_read']
 
     def get_queryset(self):
         # only messages for the logged-in user
