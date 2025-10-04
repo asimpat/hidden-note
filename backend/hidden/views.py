@@ -11,6 +11,8 @@ from rest_framework import generics
 from hidden.filter import MessageFilter
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
+
 
 
 User = get_user_model()
@@ -95,6 +97,7 @@ class MessageListView(generics.ListAPIView):
     ]
     search_fields = ['message']
     ordering_fields = ['created_at', 'is_read']
+    pagination_class = LimitOffsetPagination
 
     def get_queryset(self):
         # only messages for the logged-in user
