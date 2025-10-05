@@ -85,7 +85,7 @@ class SendMessageView(generics.CreateAPIView):
 #     messages = Message.objects.filter(user=request.user)
 #     serializer = MessageSerializer(messages, many=True)
 #     return Response(serializer.data)
-
+ 
 class MessageListView(generics.ListAPIView):
     serializer_class = MessageSerializer
     permission_classes = [IsAuthenticated]
