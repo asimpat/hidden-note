@@ -117,7 +117,7 @@ class MessageListView(generics.ListAPIView):
 #     return Response({"message": "Deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
 
 
-# @api_view(["GET"])
+# @api_view(["GET"]) 
 # @permission_classes([AllowAny])
 # def get_users(request):
 #     users = User.objects.all()
