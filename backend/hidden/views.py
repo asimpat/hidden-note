@@ -45,7 +45,7 @@ class RegisterView(generics.CreateAPIView):
 #     if serializer.is_valid():
 #         user = serializer.save()
 #         # serialize user to return safe info
-#         user_data = UserSerializer(user).data
+#         user_data = UserSerializer(user).data 
 #         return Response(
 #             {
 #                 "message": "User registered successfully",
