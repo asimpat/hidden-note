@@ -17,7 +17,7 @@ class HiddenNoteAPITest(APITestCase):
         self.client = APIClient()
 
         # URLs
-        self.register_url = reverse('register')  # You'll set this in urls.py
+        self.register_url = reverse('register')  
         self.send_message_url = reverse(
             'send_message', kwargs={'secret_link': self.secret_link})
         self.message_list_url = reverse('message_list')
