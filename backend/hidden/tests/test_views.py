@@ -75,6 +75,3 @@ class HiddenNoteAPITest(APITestCase):
         response = self.client.get(self.user_list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsInstance(response.data, list)
-
-
-
