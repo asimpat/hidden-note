@@ -34,7 +34,7 @@ class RegisterView(generics.CreateAPIView):
                 "message": "User registered successfully",
                 "user": user_data
             },
-            status=status.HTTP_201_CREATED
+            status=status.HTTP_201_CREATED 
         )
 
 
