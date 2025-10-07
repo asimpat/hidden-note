@@ -40,7 +40,7 @@ class RegisterView(generics.CreateAPIView):
 
 # @api_view(["POST"])
 # @permission_classes([AllowAny])  
-# def register(request):
+# def register(request): 
 #     serializer = RegisterSerializer(data=request.data)
 #     if serializer.is_valid():
 #         user = serializer.save()
