@@ -16,12 +16,12 @@ class HiddenNoteAPITest(APITestCase):
         self.secret_link = self.user.secret_link
         self.client = APIClient()
 
-        # URLs
-        self.register_url = reverse('register')  
+        # URLs (updated to match your urls.py names)
+        self.register_url = reverse('register')
         self.send_message_url = reverse(
             'send_message', kwargs={'secret_link': self.secret_link})
-        self.message_list_url = reverse('message_list')
-        self.user_list_url = reverse('user_list')
+        self.message_list_url = reverse('messages')  # updated
+        self.user_list_url = reverse('users')        # updated
 
     def test_register_user(self):
         """Test user registration endpoint"""
@@ -65,7 +65,7 @@ class HiddenNoteAPITest(APITestCase):
         msg = Message.objects.create(user=self.user, message="Delete me")
 
         self.client.force_authenticate(user=self.user)
-        url = reverse('message_detail', kwargs={'id': msg.id})
+        url = reverse('get_delete_message', kwargs={'id': msg.id})  # updated
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Message.objects.count(), 0)
@@ -74,4 +74,5 @@ class HiddenNoteAPITest(APITestCase):
         """Anyone can view user list"""
         response = self.client.get(self.user_list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIsInstance(response.data, list)
+        # Check the paginated 'results' key
+        self.assertIsInstance(response.data['results'], list)
