@@ -102,7 +102,7 @@ class MessageListView(generics.ListAPIView):
         # only messages for the logged-in user
         return Message.objects.filter(user=self.request.user)
 
-
+ 
 # @api_view(["DELETE"])
 # @permission_classes([IsAuthenticated])
 # def delete_message(request, id):
