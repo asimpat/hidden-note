@@ -114,7 +114,7 @@ class MessageListView(generics.ListAPIView):
 
 #     message.delete()
 #     return Response({"message": "Deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
-
+ 
 
 # @api_view(["GET"])  
 # @permission_classes([AllowAny])
