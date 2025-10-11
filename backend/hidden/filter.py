@@ -11,3 +11,4 @@ class MessageFilter(django_filters.FilterSet):
             'message': ['iexact', 'icontains'],
             'is_read': ['exact']
         }
+
