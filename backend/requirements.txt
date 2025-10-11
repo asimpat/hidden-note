@@ -6,7 +6,7 @@ python-dotenv
 django-filter
 drf-spectacular
 
-# Setuptools (required for pkg_resources)
+# Setuptools (required for pkg_resources) 
 setuptools>=65.0.0
 
 # Database
