@@ -19,12 +19,12 @@ django-cors-headers==4.3.1
 
 # Development and Production Tools
 python-decouple==3.8
-Pillow==10.1.0
+Pillow==11.0.0
 
 # Optional but recommended for production
-gunicorn==21.2.0
-whitenoise==6.6.0
+gunicorn==23.0.0
+whitenoise==6.8.2
 
 # Development dependencies
 django-debug-toolbar==4.2.0
-requests==2.31.0 
+requests==2.31.0
