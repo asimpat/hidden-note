@@ -123,7 +123,7 @@ class MessageListView(generics.ListAPIView):
 #     serializer = UserSerializer(users, many=True)
 #     return Response(serializer.data) 
 
-class GetAndDeleteMessageView(generics.RetrieveDestroyAPIView):
+class GetUpdateDeleteMessageView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MessageSerializer
     permission_classes = [IsAuthenticated]
     lookup_url_kwarg = 'id'
@@ -138,5 +138,4 @@ class UserListView(generics.ListAPIView):
 
     def get_queryset(self):
         return User.objects.all().order_by('id')
-    
     
