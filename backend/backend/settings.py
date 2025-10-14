@@ -193,8 +193,8 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '5/minute',  
-        'user': '10/minute',  # Logged-in users can send 10 requests per minute
-    }
+        'user': '10/minute',  
+                }
 
 }
 
