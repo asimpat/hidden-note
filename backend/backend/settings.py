@@ -192,7 +192,7 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.UserRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '5/minute',  # Anonymous users can send 5 requests per minute
+        'anon': '5/minute',  
         'user': '10/minute',  # Logged-in users can send 10 requests per minute
     }
 
