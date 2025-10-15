@@ -199,7 +199,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    # session time for access token 
+   
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME'    
     'ROTATE_REFRESH_TOKENS': True,
