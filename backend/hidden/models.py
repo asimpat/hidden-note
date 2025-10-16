@@ -2,6 +2,8 @@ from django.db import models
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
+
+from django.utils import timezone
 import uuid
 import secrets
 
@@ -14,6 +16,8 @@ class User(AbstractUser):
     role = models.CharField(
         max_length=10, choices=RoleChoices.choices, default=RoleChoices.USER)
     secret_link = models.SlugField(unique=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    # created_at = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
         if not self.secret_link:

@@ -33,6 +33,7 @@ class UserSerializer(serializers.ModelSerializer):
     messages = MessageSerializer(many=True, read_only=True)
     class Meta:
         model = User
-        fields = ["id", "username", "email", "role", "secret_link", "messages"]
+        fields = ["id", "username", "email", "role",
+                  "secret_link", "messages", "created_at"]
         read_only_fields = ["id", "role", "secret_link"]
 
