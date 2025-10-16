@@ -10,6 +10,7 @@ from .utils import error_response
 from rest_framework import generics
 from hidden.filter import MessageFilter
 from rest_framework import filters
+from .throttles import MessageAnonRateThrottle
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
 
@@ -72,6 +73,7 @@ class RegisterView(generics.CreateAPIView):
 class SendMessageView(generics.CreateAPIView):
     serializer_class = MessageSerializer
     permission_classes = [AllowAny]
+    throttle_classes = [MessageAnonRateThrottle]
 
     def perform_create(self, serializer):
         secret_link = self.kwargs.get("secret_link")

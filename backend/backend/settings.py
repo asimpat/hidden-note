@@ -191,9 +191,11 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle',
     ],
+    'DEFAULT_THROTTLE_EXCEPTION_DETAIL': 'Too many messages sent. Please wait a while before sending again.',
     'DEFAULT_THROTTLE_RATES': {
         'user': '1000/hour',
-        'anon': '100/hour',  
+        'anon': '100/hour', 
+        'message_anon': '5/minute',
     }
 
 }
