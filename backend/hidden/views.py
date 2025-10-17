@@ -141,3 +141,11 @@ class UserListView(generics.ListAPIView):
     def get_queryset(self):
         return User.objects.all().order_by('id')
     
+
+class DashboardView(generics.RetrieveAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        # Return only the currently logged-in user
+        return self.request.user

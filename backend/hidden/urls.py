@@ -12,4 +12,5 @@ urlpatterns = [
     path("message/<int:id>/", views.GetUpdateDeleteMessageView.as_view(),
          name="get_delete_message"),
     path("users/", views.UserListView.as_view(), name="users"),
+    path("dashboard/", views.DashboardView.as_view(), name="dashboard")
 ]
