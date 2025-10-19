@@ -145,7 +145,7 @@ class UserListView(generics.ListAPIView):
 class DashboardView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
-
+ 
     def get_object(self):
         # Return only the currently logged-in user 
         return self.request.user
