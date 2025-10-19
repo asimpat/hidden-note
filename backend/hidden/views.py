@@ -27,7 +27,7 @@ class RegisterView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        #
+    
         user_data = UserSerializer(user).data
 
         return Response(
