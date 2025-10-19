@@ -105,7 +105,7 @@ class MessageListView(generics.ListAPIView):
         return Message.objects.filter(user=self.request.user)
 
  
-# @api_view(["DELETE"])
+# @api_view(["DELETE"]) 
 # @permission_classes([IsAuthenticated])
 # def delete_message(request, id):
 #     try:
