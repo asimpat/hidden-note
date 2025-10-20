@@ -30,7 +30,7 @@ class RegisterView(generics.CreateAPIView):
     
         user_data = UserSerializer(user).data
 
-        return Response(
+        return Response( 
             {
                 "message": "User registered successfully",
                 "user": user_data
