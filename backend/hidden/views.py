@@ -17,7 +17,6 @@ from rest_framework.pagination import PageNumberPagination, LimitOffsetPaginatio
 
 User = get_user_model()
 
-
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny]
