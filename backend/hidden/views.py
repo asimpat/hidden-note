@@ -145,5 +145,4 @@ class DashboardView(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
  
     def get_object(self):
-
         return self.request.user
