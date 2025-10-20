@@ -68,7 +68,6 @@ class RegisterView(generics.CreateAPIView):
 #         serializer.save(user=user)
 #         return Response({"message": "Message sent successfully"}, status=status.HTTP_201_CREATED)
 #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 class SendMessageView(generics.CreateAPIView):
     serializer_class = MessageSerializer
     permission_classes = [AllowAny]
